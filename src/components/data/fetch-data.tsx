@@ -1,3 +1,4 @@
+"use client"
 import useFetchData from "@/src/hooks/use-data-fetch";
 import UserProfile from "../shared/user-profile";
 import { usePayroll } from "@/src/context/payroll-context";

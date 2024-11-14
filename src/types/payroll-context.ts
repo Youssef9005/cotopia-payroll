@@ -20,6 +20,8 @@ export interface UserDataContextType {
   userEmail: string;
   name: string;
   userAvatar: string;
+  id: number;
+  isAdmin: boolean;
 }
 
 export interface PaymentDataContextType {

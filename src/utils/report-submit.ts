@@ -4,7 +4,7 @@ import {
   sendEmailToUser,
 } from "@/src/service/email-service";
 import { toast } from "sonner";
-import { UserData } from "@/src/utils/session";
+import { UserData } from "../types/session";
 
 interface FormData {
   title: string;

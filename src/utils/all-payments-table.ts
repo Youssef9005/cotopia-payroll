@@ -33,7 +33,7 @@ export const allPaymentsRowData: AllPaymentsRowData[] = [
     totalHours: 50,
     status: "not yet",
     id: "2",
-    userName: "Youssef_Sameh",
+    userName: "Sameh",
   },
   {
     bonus: 20,
@@ -44,7 +44,7 @@ export const allPaymentsRowData: AllPaymentsRowData[] = [
     totalHours: 50,
     status: "not yet",
     id: "3",
-    userName: "Youssef_Sameh",
+    userName: "Ahmed",
   },
   {
     bonus: 20,
@@ -55,6 +55,6 @@ export const allPaymentsRowData: AllPaymentsRowData[] = [
     totalHours: 50,
     status: "not yet",
     id: "3",
-    userName: "Youssef_Sameh",
+    userName: "Sarah",
   },
 ];

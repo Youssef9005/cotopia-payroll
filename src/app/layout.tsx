@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import SideBar from "../components/layout/side-bar";
 import { Toaster } from "sonner";
+import { PayrollProvider } from "../context/payroll-context";
 
 export const metadata: Metadata = {
   title: "Cotopia Payroll",
@@ -15,11 +16,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-gray-200 flex gap-x-1">
-        <Toaster position="bottom-right" />
-        <SideBar />
-        {children}
-      </body>
+      <PayrollProvider>
+
+        <body className="bg-gray-200 flex">
+          <Toaster position="bottom-right" />
+          <SideBar />
+          {children}
+        </body>
+
+      </PayrollProvider>
     </html>
   );
 }

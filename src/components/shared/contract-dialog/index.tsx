@@ -22,7 +22,7 @@ interface FullScreenDialogProps {
     data: EmployeesRowData;
 }
 
-export default function FullScreenDialog({ data }: FullScreenDialogProps) {
+export default function ContractDialog({ data }: FullScreenDialogProps) {
     const [open, setOpen] = React.useState<boolean>(false);
 
     const employeeDetails = [

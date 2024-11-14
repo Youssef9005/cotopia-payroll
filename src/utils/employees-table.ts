@@ -1,6 +1,6 @@
 import { ColDef } from "ag-grid-community";
 import { EmployeesRowData } from "../types/employees-table";
-import FullScreenDialog from "../components/shared/contract-dialog";
+import ContractDialog from "../components/shared/contract-dialog";
 
 export const employeesColDefs: ColDef<EmployeesRowData>[] = [
   { headerName: "ID", field: "id", checkboxSelection: true, flex: 1 },
@@ -11,7 +11,7 @@ export const employeesColDefs: ColDef<EmployeesRowData>[] = [
   {
     headerName: "Actions",
     field: "actions",
-    cellRenderer: FullScreenDialog,
+    cellRenderer: ContractDialog,
     flex: 1,
     minWidth: 120,
   },

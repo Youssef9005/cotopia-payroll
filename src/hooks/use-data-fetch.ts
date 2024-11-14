@@ -8,6 +8,7 @@ import authService from "../service/auth-service";
 
 export default function useAuthFetch() {
   const { setError, setLoading, setUserData } = usePayroll();
+  const adminId = 6;
 
   const fetchData = useCallback(async () => {
     setLoading(true);
@@ -16,14 +17,23 @@ export default function useAuthFetch() {
         getStoredUserData() || (await authService.loginAndGetUserData());
       if (!userData) return;
 
+      const isAdmin = userData.id === adminId;
+
       saveUserDataToSession(userData);
       setUserData({
         userName: userData.username,
         userEmail: userData.email,
         name: userData.name,
         userAvatar: userData.avatar && userData.avatar.url,
+        isAdmin,
       });
       setTokenCookie(userData.token);
+
+      if (isAdmin) {
+        console.log("User is an admin");
+      } else {
+        console.log("User is not an admin");
+      }
 
       // const paymentsData = await paymentService.fetchPayments(userData.token);
       // sessionStorage.setItem("user-payments", JSON.stringify(paymentsData));
@@ -33,7 +43,7 @@ export default function useAuthFetch() {
     } finally {
       setLoading(false);
     }
-  }, [setError, setLoading, setUserData]);
+  }, [setError, setLoading, setUserData, adminId]);
 
   useEffect(() => {
     fetchData();

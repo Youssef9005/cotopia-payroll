@@ -3,15 +3,7 @@ import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
 import Avatar from '@mui/material/Avatar';
-import { getUserDataFromSession } from '@/src/utils/session';
-
-interface UserData {
-    name: string;
-    username: string;
-    avatar: {
-        url: string;
-    };
-}
+import { usePayroll } from '@/src/context/payroll-context';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -43,20 +35,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 export default function ActiveAvatars() {
-    const [userData, setUserData] = React.useState<UserData | null>(null);
-    const [loading, setLoading] = React.useState(true);
-
-    React.useEffect(() => {
-        const data = getUserDataFromSession();
-        if (data) {
-            setUserData(data); 
-        }
-        setLoading(false); 
-    }, []);
-
-    if (loading) {
-        return <div>Loading...</div>; 
-    }
+    const { userData } = usePayroll();
 
     return (
         <>
@@ -67,13 +46,13 @@ export default function ActiveAvatars() {
             >
                 <Avatar
                     alt={userData?.name}
-                    src={userData?.avatar.url}
+                    src={userData?.userAvatar}
                     style={{ width: '50px', height: '50px' }}
                 />
             </StyledBadge>
 
             <div>
-                <h1 className="text-base font-semibold">{userData?.username}</h1>
+                <h1 className="text-base font-semibold">{userData?.userName}</h1>
             </div>
         </>
     );

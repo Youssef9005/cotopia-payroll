@@ -1,8 +1,4 @@
-export interface UserData {
-  username: string;
-  email: string;
-  [key: string]: unknown;
-}
+import { UserData } from "../types/session";
 
 export function getStoredUserData(): UserData | null {
   const storedUserData = sessionStorage.getItem("user-auth");
