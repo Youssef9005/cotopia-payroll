@@ -10,6 +10,7 @@ import { X } from 'lucide-react';
 import PayrollButton from '../../ui/payroll-button';
 import { EmployeesRowData } from '@/src/types/employees-table';
 import { Divider, List, ListItem, ListItemText } from '@mui/material';
+import { usePayroll } from '@/src/context/payroll-context';
 
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & { children: React.ReactElement },
@@ -24,13 +25,21 @@ interface FullScreenDialogProps {
 
 export default function ContractDialog({ data }: FullScreenDialogProps) {
     const [open, setOpen] = React.useState<boolean>(false);
+    const { userContract, userData } = usePayroll();
+    const userContracts = userContract?.filter((contract) => contract.user_id === userData?.id);
+    const contract = userContracts && userContracts.length > 0 ? userContracts[userContracts.length - 1] : null;
 
     const employeeDetails = [
-        { label: "User Id", value: data.id?.toString() ?? 'N/A' },
-        { label: "User Name", value: data.userName ?? 'N/A' },
-        { label: "Start Work", value: data.startWork ?? 'N/A' },
-        { label: "Total Salary", value: data.totalSalary?.toString() ?? 'N/A' },
-        { label: "Total Hours", value: data.totalHours?.toString() ?? 'N/A' }
+        { label: "User Id", value: userData?.id ?? 'N/A' },
+        { label: "User Name", value: userData?.userName ?? 'N/A' },
+        { label: "Start Work", value: contract?.start_at ?? 'N/A' },
+        { label: "Amount", value: contract?.amount ?? 'N/A' },
+        { label: "Total Hours", value: data.totalHours?.toString() ?? 'N/A' },
+        { label: "Payment Address", value: contract?.payment_address ?? 'N/A' },
+        { label: "Payment Method", value: contract?.payment_method ?? 'N/A' },
+        { label: "Contract Type", value: contract?.type ?? 'N/A' },
+        { label: "User Role", value: contract?.role ?? 'N/A' }
+
     ];
 
     const handleClickOpen = () => {
@@ -61,7 +70,7 @@ export default function ContractDialog({ data }: FullScreenDialogProps) {
                             <X />
                         </IconButton>
                         <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                            User Contract - {data.userName}
+                            User Contract -  : {userData?.userName}
                         </Typography>
                     </Toolbar>
                 </AppBar>

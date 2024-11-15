@@ -1,6 +1,7 @@
+import FloatingAction from "@/src/components/ui/floating-action";
 import { usePayroll } from "@/src/context/payroll-context";
+import { UserPen } from "lucide-react";
 import Image from "next/image";
-import FullScreenDialog from "../../contract-dialog";
 
 export default function UserAvatar() {
     const { userData } = usePayroll();
@@ -12,6 +13,7 @@ export default function UserAvatar() {
                     <Image src={userData!.userAvatar} alt={userData!.userName} layout="fill" objectFit="cover" className="rounded-full" />
                 </div>
             </div>
+            <FloatingAction icon={<UserPen />} tooltipTitle="Show User Contract" />
         </div>
     )
 }

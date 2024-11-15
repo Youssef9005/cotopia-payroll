@@ -4,10 +4,12 @@ import { usePayroll } from "../context/payroll-context";
 import { getStoredUserData, saveUserDataToSession } from "../utils/session";
 import { setTokenCookie } from "../utils/cookies";
 import authService from "../service/auth-service";
-// import paymentService from "../service/payment-service";
+import paymentService from "../service/payment-service";
+import contractsService from "../service/contract-service";
 
 export default function useAuthFetch() {
-  const { setError, setLoading, setUserData } = usePayroll();
+  const { setError, setLoading, setUserData, setUserPayment, setUserContract } =
+    usePayroll();
   const adminId = 6;
 
   const fetchData = useCallback(async () => {
@@ -24,6 +26,7 @@ export default function useAuthFetch() {
         userName: userData.username,
         userEmail: userData.email,
         name: userData.name,
+        id: userData.id,
         userAvatar: userData.avatar && userData.avatar.url,
         isAdmin,
       });
@@ -35,9 +38,12 @@ export default function useAuthFetch() {
         console.log("User is not an admin");
       }
 
-      // const paymentsData = await paymentService.fetchPayments(userData.token);
-      // sessionStorage.setItem("user-payments", JSON.stringify(paymentsData));
-      // setUserPayment(paymentsData.data.data);
+      const paymentsData = await paymentService.fetchPayments(userData.token);
+      setUserPayment(paymentsData);
+
+      const contractsData = await contractsService.fetchContracts(userData.token);
+      setUserContract(contractsData);
+
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : "Unexpected error");
     } finally {
