@@ -1,5 +1,6 @@
 "use client";
 import AdvanceFormDialog from '@/src/components/shared/advance';
+import SectionHeader from '@/src/components/shared/section-header';
 import CTable from '@/src/components/ui/basic-table';
 import { usePayroll } from '@/src/context/payroll-context';
 import { AdvanceRowData } from '@/src/types/advance-table';
@@ -10,12 +11,19 @@ export default function Advance() {
 
     return (
         <>
+
             {userData?.isAdmin ? (
-                <CTable<AdvanceRowData> rowData={advanceRowDataAdmin} colData={advanceColDefAdmin} />
+                <div className='flex flex-col items-center justify-center w-full'>
+                    <SectionHeader title="All Advance Requests For User" />
+                    <CTable<AdvanceRowData> rowData={advanceRowDataAdmin} colData={advanceColDefAdmin} />
+                </div>
             ) : (
                 <>
-                    <CTable<AdvanceRowData> rowData={advanceRowData} colData={advanceColDefs} />
-                    <AdvanceFormDialog />
+                    <div className='flex flex-col items-center justify-center w-full'>
+                        <SectionHeader title="Your Advance Requests" />
+                        <CTable<AdvanceRowData> rowData={advanceRowData} colData={advanceColDefs} />
+                        <AdvanceFormDialog />
+                    </div>
                 </>)}
         </>
     );

@@ -1,3 +1,4 @@
+import PayrollButton from "@/src/components/ui/payroll-button";
 import React from "react";
 
 interface SubmitButtonProps {
@@ -6,12 +7,13 @@ interface SubmitButtonProps {
 
 export default function SubmitButton({ loading }: SubmitButtonProps) {
     return (
-        <button
-            className="w-1/2 p-3 bg-black rounded-md text-white font-medium"
+        <PayrollButton
+            title={loading ? "Submitting..." : "Submit"}
+            extraClassName="w-1/2 py-3"
             type="submit"
             disabled={loading}
         >
-            {loading ? "Submitting..." : "Submit"}
-        </button>
+
+        </PayrollButton>
     )
 }

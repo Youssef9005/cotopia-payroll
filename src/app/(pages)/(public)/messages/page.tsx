@@ -1,4 +1,5 @@
 "use client";
+import SectionHeader from "@/src/components/shared/section-header";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -42,6 +43,7 @@ export default function Messages() {
 
     return (
         <div className="w-full min-h-screen flex flex-col items-center justify-center p-5 gap-y-6">
+            <SectionHeader title="All Messages" />
             {loading ? (
                 <h1 className="text-base font-medium text-gray-500">Loading messages...</h1>
             ) : error ? (
@@ -50,7 +52,7 @@ export default function Messages() {
                 messages.map((messageData, index) => (
                     <div
                         key={index}
-                        className="w-full p-5 bg-gray-300/80 border border-gray-400 rounded-md flex items-center justify-between"
+                        className="w-full p-5 bg-gray-300/80 dark:bg-gray-800 border border-gray-400 dark:border-gray-700 rounded-md flex items-center justify-between"
                     >
                         <h1 className="text-base font-medium">{messageData.message}</h1>
                         <p className="text-sm font-medium text-gray-800">{messageData.date}</p>

@@ -47,7 +47,7 @@ export default function AdminsDialog() {
 
     return (
         <>
-            <PayrollButton title="Show All Admin" extraClassName="py-3 w-1/2 mt-auto" onClick={handleClickOpen}></PayrollButton>
+            <PayrollButton title="Show All Admin" extraClassName="py-[10px] w-1/2 mt-auto" onClick={handleClickOpen}></PayrollButton>
 
             <Dialog
                 fullScreen

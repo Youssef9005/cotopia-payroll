@@ -3,6 +3,7 @@ import "./globals.css";
 import SideBar from "../components/layout/side-bar";
 import { Toaster } from "sonner";
 import { PayrollProvider } from "../context/payroll-context";
+import { ThemeProvider } from "next-themes";
 
 export const metadata: Metadata = {
   title: "Cotopia Payroll",
@@ -16,15 +17,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <PayrollProvider>
-
-        <body className="bg-gray-200 flex">
-          <Toaster position="bottom-right" />
-          <SideBar />
-          {children}
-        </body>
-
-      </PayrollProvider>
+      <body className="bg-gray-200 dark:bg-gray-950 flex">
+        <PayrollProvider>
+          <ThemeProvider attribute="class">
+            <Toaster position="bottom-right" />
+            <SideBar />
+            {children}
+          </ThemeProvider>
+        </PayrollProvider>
+      </body>
     </html>
   );
 }

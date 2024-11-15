@@ -52,7 +52,7 @@ export default function ActiveAvatars() {
             </StyledBadge>
 
             <div>
-                <h1 className="text-base font-semibold">{userData?.userName}</h1>
+                <h1 className="text-base font-semibold text-black dark:text-white">{userData?.userName}</h1>
             </div>
         </>
     );

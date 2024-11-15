@@ -8,7 +8,7 @@ export default function SideBarHeader() {
             <Logo />
             <Link href={`/`} className="w-full flex items-center justify-center">
 
-                <div className="w-3/4 mt-5 flex items-center justify-between gap-x-7 rounded-2xl bg-gray-50 py-1 px-5 border border-gray-100">
+                <div className="w-3/4 mt-5 flex items-center justify-between gap-x-7 rounded-2xl bg-gray-50 dark:bg-gray-800 py-1 px-5 border border-gray-100 dark:border-gray-700">
                     <ActiveAvatars />
                 </div>
 
