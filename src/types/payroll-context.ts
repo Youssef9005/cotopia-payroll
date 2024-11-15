@@ -1,5 +1,4 @@
 import { Dispatch, ReactNode, SetStateAction } from "react";
-
 export interface PayrollContextType {
   userData: UserDataContextType | null;
   setUserData: Dispatch<SetStateAction<UserDataContextType | null>>;

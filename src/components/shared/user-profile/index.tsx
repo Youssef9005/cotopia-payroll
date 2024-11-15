@@ -5,9 +5,10 @@ import UserAvatar from "./user-avatar";
 import AdminsDialog from "../admins-dialog";
 import { usePayroll } from "@/src/context/payroll-context";
 import SectionHeader from "../section-header";
+import ContractDialog from "../contract-dialog";
 
 export default function UserProfile() {
-    const { userData } = usePayroll();
+    const { userData, userContract } = usePayroll();
 
     return (
         <main className="flex-1 h-screen p-4 flex flex-col gap-y-8">
@@ -22,6 +23,8 @@ export default function UserProfile() {
                     <AdminsDialog />
                 )}
             </div>
+
+            <ContractDialog data={userContract} icon={true}/>
         </main>
     )
 }
