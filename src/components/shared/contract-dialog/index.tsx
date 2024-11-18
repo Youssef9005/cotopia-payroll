@@ -26,7 +26,7 @@ interface FullScreenDialogProps {
     icon?: boolean;
 }
 
-export default function ContractDialog({ data, icon = false }: FullScreenDialogProps) {
+export default function ContractDialog({ icon = false }: FullScreenDialogProps) {
     const [open, setOpen] = React.useState<boolean>(false);
     const { userContract, userData } = usePayroll();
     const userContracts = userContract?.filter((contract) => contract.user_id === userData?.id);
@@ -37,7 +37,7 @@ export default function ContractDialog({ data, icon = false }: FullScreenDialogP
         { label: "User Name", value: userData?.userName ?? 'N/A' },
         { label: "Start Work", value: contract?.start_at ?? 'N/A' },
         { label: "Amount", value: contract?.amount ?? 'N/A' },
-        { label: "Total Hours", value: data?.totalHours?.toString() ?? 'N/A' }, 
+        { label: "Total Hours", value: "100" }, 
         { label: "Payment Address", value: contract?.payment_address ?? 'N/A' },
         { label: "Payment Method", value: contract?.payment_method ?? 'N/A' },
         { label: "Contract Type", value: contract?.type ?? 'N/A' },
