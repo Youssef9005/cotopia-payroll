@@ -80,14 +80,14 @@ export const handleSubmitReport = async (
     setError("User data not found in session.");
     return;
   }
-  const { username, email } = userData;
+  const { user } = userData;
   const { title, description } = formData;
   setLoading(true);
   setError(null);
   try {
-    await sendDeveloperEmail(title, description, username, email);
-    await sendUserEmail(username, email, description);
-    await saveMessageToFirebase(username, formattedDate);
+    await sendDeveloperEmail(title, description, user.username, user.email);
+    await sendUserEmail(user.username, user.email, description);
+    await saveMessageToFirebase(user.username, formattedDate);
 
     toast.success("Issue submitted successfully!");
   } catch (err: unknown) {
