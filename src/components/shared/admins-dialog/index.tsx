@@ -33,7 +33,7 @@ export default function AdminsDialog() {
 
     const handleClickOpen = () => {
         setOpen(true);
-        console.log(userData?.id)
+        console.log(userData?.user.id)
     };
 
     const handleClose = () => {
@@ -79,13 +79,13 @@ export default function AdminsDialog() {
                 <List>
 
                     <ListItemButton>
-                        <ListItemText primary={userData?.username} secondary={`${userData?.id}`} />
+                        <ListItemText primary={userData?.user.username} secondary={`${userData?.user.id}`} />
                     </ListItemButton>
 
 
                     <Divider />
                     <ListItemButton>
-                        <ListItemText primary={userData?.username} secondary={`${userData?.id}`} />
+                        <ListItemText primary={userData?.user.username} secondary={`${userData?.user.id}`} />
                     </ListItemButton>
 
                 </List>
