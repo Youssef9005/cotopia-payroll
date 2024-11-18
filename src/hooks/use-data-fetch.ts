@@ -3,7 +3,6 @@ import { useEffect, useCallback } from "react";
 import { usePayroll } from "../context/payroll-context";
 import { getStoredUserData, saveUserDataToSession } from "../utils/session";
 import { setTokenCookie } from "../utils/cookies";
-import authService from "../service/auth-service";
 import paymentService from "../service/payment-service";
 import contractsService from "../service/contract-service";
 
@@ -14,36 +13,32 @@ export default function useAuthFetch() {
 
   const fetchData = useCallback(async () => {
     setLoading(true);
-    try {
-      const userData =
-        getStoredUserData() || (await authService.loginAndGetUserData());
-      if (!userData) return;
+    const userData = getStoredUserData();
+    
+    if (!userData) {
+      setLoading(false);
+      return;
+    }
 
-      const isAdmin = userData.id === adminId;
+    try {
+      const isAdmin = userData.user.id === adminId;
 
       saveUserDataToSession(userData);
       setUserData({
-        userName: userData.username,
-        userEmail: userData.email,
-        name: userData.name,
-        id: userData.id,
-        userAvatar: userData.avatar && userData.avatar.url,
+        userName: userData.user.username,
+        userEmail: userData.user.email,
+        name: userData.user.name,
+        id: userData.user.id,
+        userAvatar: userData.user.avatar.url,
         isAdmin,
       });
-      setTokenCookie(userData.token);
+      setTokenCookie(userData.accessToken);
 
-      if (isAdmin) {
-        console.log("User is an admin");
-      } else {
-        console.log("User is not an admin");
-      }
-
-      const paymentsData = await paymentService.fetchPayments(userData.token);
+      const paymentsData = await paymentService.fetchPayments(userData.accessToken);
       setUserPayment(paymentsData);
 
-      const contractsData = await contractsService.fetchContracts(userData.token);
+      const contractsData = await contractsService.fetchContracts(userData.accessToken);
       setUserContract(contractsData);
-
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : "Unexpected error");
     } finally {

@@ -8,10 +8,9 @@ import Slide from '@mui/material/Slide';
 import { TransitionProps } from '@mui/material/transitions';
 import { UserPen, X } from 'lucide-react';
 import PayrollButton from '../../ui/payroll-button';
-import { EmployeesRowData } from '@/src/types/employees-table';
+// import { EmployeesRowData } from '@/src/types/employees-table';
 import { Divider, List, ListItem, ListItemText } from '@mui/material';
 import { usePayroll } from '@/src/context/payroll-context';
-import { ContractDataContextType } from '@/src/types/payroll-context';
 import FloatingAction from '../../ui/floating-action';
 
 const Transition = React.forwardRef(function Transition(
@@ -38,13 +37,13 @@ export default function ContractDialog({ data, icon = false }: FullScreenDialogP
         { label: "User Name", value: userData?.userName ?? 'N/A' },
         { label: "Start Work", value: contract?.start_at ?? 'N/A' },
         { label: "Amount", value: contract?.amount ?? 'N/A' },
-        { label: "Total Hours", value: data.totalHours?.toString() ?? 'N/A' },
+        { label: "Total Hours", value: data?.totalHours?.toString() ?? 'N/A' }, 
         { label: "Payment Address", value: contract?.payment_address ?? 'N/A' },
         { label: "Payment Method", value: contract?.payment_method ?? 'N/A' },
         { label: "Contract Type", value: contract?.type ?? 'N/A' },
-        { label: "User Role", value: contract?.role ?? 'N/A' }
-
+        { label: "User Role", value: contract?.role ?? 'N/A' },
     ];
+    
 
     const handleClickOpen = () => {
         setOpen(true);

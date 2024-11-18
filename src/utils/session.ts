@@ -1,26 +1,31 @@
 import { UserData } from "../types/session";
 
 export function getStoredUserData(): UserData | null {
-  const storedUserData = sessionStorage.getItem("user-auth");
-  return storedUserData ? JSON.parse(storedUserData) : null;
+  if (typeof window !== "undefined" && window.sessionStorage) {
+    const storedUserData = localStorage.getItem("user-auth");
+    return storedUserData ? JSON.parse(storedUserData) : null;
+  }
+  return null;
 }
 
 export function saveUserDataToSession(userData: UserData): void {
-  sessionStorage.setItem("user-auth", JSON.stringify(userData));
-  window.dispatchEvent(new Event("sessionStorageUpdated"));
-}
-
-export function getUserDataFromSession() {
   if (typeof window !== "undefined" && window.sessionStorage) {
-    const userData = sessionStorage.getItem("user-auth");
-    return userData ? JSON.parse(userData) : null;
+    localStorage.setItem("user-auth", JSON.stringify(userData));
+    window.dispatchEvent(new Event("sessionStorageUpdated"));
   }
 }
 
 export function getSessionData() {
   if (typeof window !== "undefined" && window.sessionStorage) {
-    const data = sessionStorage.getItem("cotopia-lite");
+    const data = localStorage.getItem("user-auth");
     return data ? JSON.parse(data) : {};
   }
   return {};
+}
+
+export function getUserDataFromSession() {
+  if (typeof window !== "undefined" && window.sessionStorage) {
+    const userData = localStorage.getItem("user-auth");
+    return userData ? JSON.parse(userData) : null;
+  }
 }
