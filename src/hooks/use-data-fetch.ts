@@ -44,7 +44,7 @@ export default function useAuthFetch() {
     } finally {
       setLoading(false);
     }
-  }, [setError, setLoading, setUserData, adminId]);
+  }, [setError, setLoading, setUserData, adminId , setUserContract , setUserPayment]);
 
   useEffect(() => {
     fetchData();
